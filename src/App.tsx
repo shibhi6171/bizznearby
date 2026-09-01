@@ -31,6 +31,8 @@ const App = () => (
             <Sonner />
             <Routes>
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
+
               <Route element={<AppLayout />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/listings" element={<ListingsPage />} />
