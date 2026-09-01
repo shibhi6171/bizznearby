@@ -59,3 +59,16 @@ export function supabaseForUser(ctx: ToolContext) {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }
+
+/** Resolves the app profile row id for the signed-in user (tables key off profiles.id). */
+export async function profileIdForUser(
+  supabase: ReturnType<typeof supabaseForUser>,
+  ctx: ToolContext,
+): Promise<string | null> {
+  const { data } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("user_id", ctx.getUserId())
+    .maybeSingle();
+  return (data as { id: string } | null)?.id ?? null;
+}
