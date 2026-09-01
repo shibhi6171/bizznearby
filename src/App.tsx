@@ -9,6 +9,8 @@ import { AppLayout } from "@/components/layout/AppLayout";
 
 import HomePage from "@/pages/HomePage";
 import AuthPage from "@/pages/AuthPage";
+import OAuthConsent from "@/pages/OAuthConsent";
+
 import ListingsPage from "@/pages/ListingsPage";
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
