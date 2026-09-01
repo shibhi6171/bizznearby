@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "sdk_version": "0.28.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://loabdewntwymuqszqosy.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "local-connect-hub",
+      "version": "0.1.0",
+      "title": "Local Connect Hub"
+    },
+    "tools": [
+      {
+        "name": "search_listings",
+        "title": "Search listings",
+        "description": "Search active marketplace listings (services and products) by keyword, category slug, location slug, type and max price.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Free text matched against listing title and description."
+            },
+            "category_slug": {
+              "type": "string",
+              "description": "Category slug, e.g. 'plumbing'."
+            },
+            "location_slug": {
+              "type": "string",
+              "description": "Location slug, e.g. 'chennai'."
+            },
+            "listing_type": {
+              "type": "string",
+              "enum": [
+                "service",
+                "product"
+              ]
+            },
+            "max_price": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results, default 10, capped at 50."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_listing",
+        "title": "Get listing details",
+        "description": "Fetch full details of one listing by id or slug, including category, location and reviews.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Listing UUID."
+            },
+            "slug": {
+              "type": "string",
+              "description": "Listing slug."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_wishlist",
+        "title": "List my wishlist",
+        "description": "List the signed-in user's saved (wishlisted) listings.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "description": "Max results, default 20, capped at 100."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "save_listing",
+        "title": "Save listing to wishlist",
+        "description": "Add a listing to the signed-in user's wishlist.",
+        "annotations": {
+          "readOnlyHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "listing_id": {
+              "type": "string",
+              "description": "Listing UUID to save."
+            }
+          },
+          "required": [
+            "listing_id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "contact_seller",
+        "title": "Contact seller about a listing",
+        "description": "Send an enquiry (lead) to the seller of a listing on behalf of the signed-in user.",
+        "annotations": {
+          "readOnlyHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "listing_id": {
+              "type": "string",
+              "description": "Listing UUID to enquire about."
+            },
+            "message": {
+              "type": "string",
+              "description": "Message for the seller."
+            },
+            "contact_method": {
+              "type": "string",
+              "enum": [
+                "message",
+                "phone",
+                "email"
+              ],
+              "description": "Preferred contact method, default 'message'."
+            }
+          },
+          "required": [
+            "listing_id",
+            "message"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "my_listings",
+        "title": "List my seller listings",
+        "description": "List listings owned by the signed-in seller, with views and lead counts.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "active",
+                "paused",
+                "expired"
+              ]
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results, default 20, capped at 100."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "my_leads",
+        "title": "List my seller leads",
+        "description": "List customer enquiries (leads) received by the signed-in seller, newest first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "new",
+                "contacted",
+                "converted",
+                "closed"
+              ]
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results, default 20, capped at 100."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_lead_status",
+        "title": "Update lead status",
+        "description": "Update the status of a lead owned by the signed-in seller.",
+        "annotations": {
+          "readOnlyHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "lead_id": {
+              "type": "string",
+              "description": "Lead UUID."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "new",
+                "contacted",
+                "converted",
+                "closed"
+              ]
+            }
+          },
+          "required": [
+            "lead_id",
+            "status"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

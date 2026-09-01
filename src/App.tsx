@@ -9,6 +9,8 @@ import { AppLayout } from "@/components/layout/AppLayout";
 
 import HomePage from "@/pages/HomePage";
 import AuthPage from "@/pages/AuthPage";
+import OAuthConsent from "@/pages/OAuthConsent";
+
 import ListingsPage from "@/pages/ListingsPage";
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
@@ -31,6 +33,8 @@ const App = () => (
             <Sonner />
             <Routes>
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
+
               <Route element={<AppLayout />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/listings" element={<ListingsPage />} />
