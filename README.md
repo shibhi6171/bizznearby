@@ -8,7 +8,7 @@ This must be:
 * Authenticated
 * Payment-enabled
 * Deployment-ready
-* Free from broken routes (no 404 errors)
+* Free from broken routes
 * Free from mock logic or placeholder systems
 This is NOT a UI demo.
 
