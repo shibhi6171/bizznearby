@@ -77,7 +77,14 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4">
+            <Link to="/categories" className="text-sm font-medium hover:text-accent transition-colors">
+              Categories
+            </Link>
+            <Link to="/shops" className="text-sm font-medium hover:text-accent transition-colors">
+              Shops
+            </Link>
             {isAuthenticated && isSeller && (
+
               <Button
                 variant="ghost"
                 size="sm"

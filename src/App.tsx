@@ -13,6 +13,9 @@ import OAuthConsent from "@/pages/OAuthConsent";
 
 import ListingsPage from "@/pages/ListingsPage";
 import CategoriesPage from "@/pages/CategoriesPage";
+import ShopsPage from "@/pages/ShopsPage";
+import ShopProfilePage from "@/pages/ShopProfilePage";
+
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -39,6 +42,9 @@ const App = () => (
               <Route element={<AppLayout />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/categories" element={<CategoriesPage />} />
+                <Route path="/shops" element={<ShopsPage />} />
+                <Route path="/shops/:slug" element={<ShopProfilePage />} />
+
                 <Route path="/listings" element={<ListingsPage />} />
                 <Route path="/listings/:id" element={<ListingDetailPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
