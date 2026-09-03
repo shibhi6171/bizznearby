@@ -12,6 +12,7 @@ import AuthPage from "@/pages/AuthPage";
 import OAuthConsent from "@/pages/OAuthConsent";
 
 import ListingsPage from "@/pages/ListingsPage";
+import CategoriesPage from "@/pages/CategoriesPage";
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
 import NotFoundPage from "@/pages/NotFoundPage";
