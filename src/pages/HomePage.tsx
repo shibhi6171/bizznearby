@@ -6,22 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { ListingsGrid } from '@/components/listings/ListingsGrid';
 import { useCategories } from '@/hooks/useCategories';
+import { getCategoryIcon } from '@/lib/categoryIcons';
 import { useListings } from '@/hooks/useListings';
 import { useLocation } from '@/contexts/LocationContext';
 
 // Category icons mapping
-const categoryIcons: Record<string, string> = {
-  'Home': '🏠',
-  'Sparkles': '✨',
-  'GraduationCap': '🎓',
-  'Heart': '❤️',
-  'PartyPopper': '🎉',
-  'Car': '🚗',
-  'Laptop': '💻',
-  'Shirt': '👕',
-  'Sofa': '🛋️',
-  'ShoppingBag': '🛒',
-};
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -123,7 +112,7 @@ export default function HomePage() {
                   <Link key={category.id} to={`/listings?category=${category.id}`}>
                     <Card className="p-6 text-center hover:shadow-lg hover:border-accent/50 transition-all group cursor-pointer">
                       <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
-                        {categoryIcons[category.icon || ''] || '📦'}
+                        {getCategoryIcon(category.icon)}
                       </div>
                       <h3 className="font-medium text-sm group-hover:text-accent transition-colors">
                         {category.name}
