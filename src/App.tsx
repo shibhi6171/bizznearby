@@ -13,6 +13,9 @@ import OAuthConsent from "@/pages/OAuthConsent";
 
 import ListingsPage from "@/pages/ListingsPage";
 import CategoriesPage from "@/pages/CategoriesPage";
+import ShopsPage from "@/pages/ShopsPage";
+import ShopProfilePage from "@/pages/ShopProfilePage";
+
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
 import NotFoundPage from "@/pages/NotFoundPage";
