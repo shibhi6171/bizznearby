@@ -114,9 +114,10 @@ export type Database = {
           contact_method: string | null
           created_at: string
           id: string
-          listing_id: string
+          listing_id: string | null
           message: string | null
           seller_id: string
+          shop_id: string | null
           status: Database["public"]["Enums"]["lead_status"] | null
           updated_at: string
         }
@@ -125,9 +126,10 @@ export type Database = {
           contact_method?: string | null
           created_at?: string
           id?: string
-          listing_id: string
+          listing_id?: string | null
           message?: string | null
           seller_id: string
+          shop_id?: string | null
           status?: Database["public"]["Enums"]["lead_status"] | null
           updated_at?: string
         }
@@ -136,9 +138,10 @@ export type Database = {
           contact_method?: string | null
           created_at?: string
           id?: string
-          listing_id?: string
+          listing_id?: string | null
           message?: string | null
           seller_id?: string
+          shop_id?: string | null
           status?: Database["public"]["Enums"]["lead_status"] | null
           updated_at?: string
         }
@@ -162,6 +165,13 @@ export type Database = {
             columns: ["seller_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_shop_id_fkey"
+            columns: ["shop_id"]
+            isOneToOne: false
+            referencedRelation: "shops"
             referencedColumns: ["id"]
           },
         ]
@@ -480,6 +490,118 @@ export type Database = {
           },
         ]
       }
+      shops: {
+        Row: {
+          about: string | null
+          area: string | null
+          category_id: string | null
+          city: string | null
+          cover_image: string | null
+          created_at: string
+          emoji: string | null
+          hours: string | null
+          id: string
+          images: string[]
+          is_premium: boolean
+          is_verified: boolean
+          latitude: number | null
+          location_id: string | null
+          longitude: number | null
+          name: string
+          offerings: Json
+          phone: string | null
+          rating: number
+          reviews_count: number
+          seller_id: string | null
+          slug: string
+          status: Database["public"]["Enums"]["listing_status"]
+          tagline: string | null
+          tags: string[]
+          updated_at: string
+          years_active: number
+        }
+        Insert: {
+          about?: string | null
+          area?: string | null
+          category_id?: string | null
+          city?: string | null
+          cover_image?: string | null
+          created_at?: string
+          emoji?: string | null
+          hours?: string | null
+          id?: string
+          images?: string[]
+          is_premium?: boolean
+          is_verified?: boolean
+          latitude?: number | null
+          location_id?: string | null
+          longitude?: number | null
+          name: string
+          offerings?: Json
+          phone?: string | null
+          rating?: number
+          reviews_count?: number
+          seller_id?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["listing_status"]
+          tagline?: string | null
+          tags?: string[]
+          updated_at?: string
+          years_active?: number
+        }
+        Update: {
+          about?: string | null
+          area?: string | null
+          category_id?: string | null
+          city?: string | null
+          cover_image?: string | null
+          created_at?: string
+          emoji?: string | null
+          hours?: string | null
+          id?: string
+          images?: string[]
+          is_premium?: boolean
+          is_verified?: boolean
+          latitude?: number | null
+          location_id?: string | null
+          longitude?: number | null
+          name?: string
+          offerings?: Json
+          phone?: string | null
+          rating?: number
+          reviews_count?: number
+          seller_id?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["listing_status"]
+          tagline?: string | null
+          tags?: string[]
+          updated_at?: string
+          years_active?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shops_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       transactions: {
         Row: {
           amount: number
@@ -603,6 +725,27 @@ export type Database = {
       is_admin: { Args: never; Returns: boolean }
       is_listing_owner: { Args: { _listing_id: string }; Returns: boolean }
       is_seller: { Args: never; Returns: boolean }
+      shops_nearby: {
+        Args: {
+          _exclude_id?: string
+          _lat: number
+          _limit?: number
+          _lng: number
+          _radius_km?: number
+        }
+        Returns: {
+          area: string
+          category_id: string
+          city: string
+          cover_image: string
+          distance_km: number
+          emoji: string
+          id: string
+          name: string
+          rating: number
+          slug: string
+        }[]
+      }
     }
     Enums: {
       app_role: "consumer" | "seller" | "admin"
