@@ -19,7 +19,6 @@ import ShopProfilePage from "@/pages/ShopProfilePage";
 
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
-<Route path="/profile" element={<ProfilePage />} />
 import NotFoundPage from "@/pages/NotFoundPage";
 import SellerDashboardPage from "@/pages/seller/SellerDashboardPage";
 import SellerListingsPage from "@/pages/seller/SellerListingsPage";
@@ -50,6 +49,7 @@ const App = () => (
                 <Route path="/listings" element={<ListingsPage />} />
                 <Route path="/listings/:id" element={<ListingDetailPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/seller" element={<SellerDashboardPage />} />
                 <Route path="/seller/listings" element={<SellerListingsPage />} />
                 <Route path="/seller/listings/new" element={<CreateListingPage />} />
