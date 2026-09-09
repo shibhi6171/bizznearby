@@ -19,6 +19,7 @@ import ShopProfilePage from "@/pages/ShopProfilePage";
 
 import ListingDetailPage from "@/pages/ListingDetailPage";
 import WishlistPage from "@/pages/WishlistPage";
+<Route path="/profile" element={<ProfilePage />} />
 import NotFoundPage from "@/pages/NotFoundPage";
 import SellerDashboardPage from "@/pages/seller/SellerDashboardPage";
 import SellerListingsPage from "@/pages/seller/SellerListingsPage";
