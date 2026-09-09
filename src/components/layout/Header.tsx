@@ -109,13 +109,17 @@ export function Header() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-2">
-                    <Avatar className="w-7 h-7">
-                      <AvatarImage src={profile?.avatar_url || undefined} />
-                      <AvatarFallback className="bg-accent text-accent-foreground text-xs">
-                        {getInitials(profile?.full_name)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="hidden lg:block">{profile?.full_name || 'Account'}</span>
+                    <Avatar className="h-8 w-8">
+  <AvatarImage src={profile?.avatar_url || undefined} />
+
+  <AvatarFallback className="bg-accent text-accent-foreground text-xs font-semibold">
+    {(profile?.full_name || 'Account').charAt(0).toUpperCase()}
+  </AvatarFallback>
+</Avatar>
+
+<span className="hidden max-w-[140px] truncate font-medium lg:block">
+  {profile?.full_name || 'Account'}
+</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
