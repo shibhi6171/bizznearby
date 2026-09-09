@@ -14,11 +14,17 @@ import {
 const ProfilePage = () => {
   const { user, signOut } = useAuth();
 
-  const displayName =
-    user?.user_metadata?.full_name ||
-    user?.user_metadata?.name ||
-    user?.email?.split("@")[0] ||
-    "LocalMart User";
+const rawName =
+  user?.user_metadata?.full_name ||
+  user?.user_metadata?.name ||
+  user?.email?.split("@")[0] ||
+  "LocalMart User";
+
+const displayName = rawName
+  .replace(/[._-]/g, " ")
+  .replace(/\d+$/, "")
+  .trim()
+  .replace(/\b\w/g, (char) => char.toUpperCase());
 
   const email = user?.email || "No email available";
 
@@ -53,8 +59,8 @@ const ProfilePage = () => {
           </div>
 
           {/* Profile information */}
-          <div className="px-5 pb-6 sm:px-8">
-            <div className="-mt-12 flex flex-col gap-5 sm:-mt-14 sm:flex-row sm:items-end sm:justify-between">
+         <div className="relative z-10 px-5 pb-6 sm:px-8">
+  <div className="-mt-12 flex flex-col gap-5 sm:-mt-14 sm:flex-row sm:items-end sm:justify-between">
 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
 
